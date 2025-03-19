@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw Money</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Withdraw Money</h1>
+    <p>Status: <span id="status">Connecting...</span></p>
+    <div id="output"></div>
+    <div class="container">
+        <input type="text" id="amount" placeholder="Enter amount to withdraw" />
+        <div id="redNotice" class="notice"></div>
+        <button onclick="withdraw()">Withdraw</button>
+    </div>
+    
+    <script>
+        const ws = new WebSocket("ws://145.24.222.63:8001");
+
+        ws.onopen = () => document.getElementById("status").textContent = "Connected ✅";
+
+        ws.onmessage = (event) => {
+            try {
+                let data = JSON.parse(event.data);
+                let message = "";
+                let amountField = document.getElementById("amount");
+
+                if (data.type === "keypad") {
+                    let key = data.value;
+
+                    if (key === "A") {
+                        window.location.href = "index.html"; // Go to RFID Page
+                    } else if (key === "B") {
+                        window.location.href = "withdraw.html"; // Stay on Withdraw Page
+                    } else if (key >= "0" && key <= "9") {
+                        amountField.value += key; // Append number to input field
+                    } else if (key === "C") {
+                        amountField.value = amountField.value.slice(0, -1); // Remove last digit
+                    } else if (key === "D") {
+                        withdraw(); // Execute withdrawal
+                    }
+
+                }
+
+                if (message) {
+                    console.log(message);
+                    let outputDiv = document.getElementById("output");
+                    let p = document.createElement("p");
+                    p.textContent = message;
+                    outputDiv.appendChild(p);
+                }
+
+            } catch (error) {
+                console.error("Invalid JSON received:", event.data);
+            }
+        };
+        function withdraw() {
+    let amount = parseFloat(document.getElementById("amount").value);
+    let outputDiv = document.getElementById("output");
+    let notice = document.getElementById("redNotice");
+
+    if (isNaN(amount) || amount <= 0) {
+        notice.textContent = "Please enter a valid amount.";
+        notice.style.display = "block"; // Show red notice
+        return;
+    }
+
+    if (amount > 100) {
+        notice.textContent = "YOU DONT HAVE THAT MOTION!";
+        notice.style.display = "block"; // Show red notice
+    } else {
+        notice.style.display = "none"; // Hide notice if successful withdrawal
+        // Simulate successful withdrawal
+        let successMessage = `Success! You withdrew ${amount}€`;
+
+        let successNotice = document.createElement("p");
+        successNotice.textContent = successMessage;
+        outputDiv.appendChild(successNotice);
+    }
+}
+    </script>
+</body>
+</html>
