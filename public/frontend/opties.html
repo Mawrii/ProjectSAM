@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="Images/LOGO.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style/stylesheet_opties.css">
+    <title>Optie</title>
+</head>
+<body>
+    <div class="LOGO">
+        <img src="Style/Images/HR.png" alt="LOGO" width="150" height="150">
+    </div>
+    <div class="button" id="balanceButton">
+        <h1>Saldo Opvragen</h1>
+    </div>
+    <div class="button2" id="changePinButton">
+        <h1>Pincode Wijzigen</h1>
+    </div>
+    <div class="button3" id="cancelButton">
+        <h1>Afbreken</h1>
+    </div>
+    <div class="button4" id="withdrawButton">
+        <h1>Geld Opnemen</h1>
+    </div>
+
+    <a href="snelpin.html">
+        <div class="button6">
+            <h1>Snel Pinnen</h1>
+        </div>
+    </a>
+    
+    <div class="button5" id="languageButton">
+        <h1>
+            <img src="Style/Images/Countries/english.png" alt="eng" width="55" height="55">
+            <img src="Style/Images/Countries/france.png" alt="fr" width="55" height="55">
+            <img src="Style/Images/Countries/germany.png" alt="ger" width="55" height="55">
+            <img src="Style/Images/Countries/nl.png" alt="nl" width="55" height="55">
+        </h1>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const language = localStorage.getItem('language') || 'en';
+            setLanguage(language);
+        });
+
+        function setLanguage(language) {
+            const translations = {
+                en: {
+                    balanceButton: 'Check Balance',
+                    changePinButton: 'Change PIN',
+                    cancelButton: 'Cancel',
+                    withdrawButton: 'Withdraw Money',
+                    languageButton: `
+                        <img src="Style/Images/Countries/english.png" alt="eng" width="55" height="55">
+                        <img src="Style/Images/Countries/france.png" alt="fr" width="55" height="55">
+                        <img src="Style/Images/Countries/germany.png" alt="ger" width="55" height="55">
+                        <img src="Style/Images/Countries/nl.png" alt="nl" width="55" height="55">
+                    `
+                },
+                nl: {
+                    balanceButton: 'Saldo Opvragen',
+                    changePinButton: 'Pincode Wijzigen',
+                    cancelButton: 'Afbreken',
+                    withdrawButton: 'Geld Opnemen',
+                    languageButton: `
+                        <img src="Style/Images/Countries/nl.png" alt="nl" width="55" height="55">
+                        <img src="Style/Images/Countries/english.png" alt="eng" width="55" height="55">
+                        <img src="Style/Images/Countries/france.png" alt="fr" width="55" height="55">
+                        <img src="Style/Images/Countries/germany.png" alt="ger" width="55" height="55">
+                    `
+                },
+                fr: {
+                    balanceButton: 'Vérifier le solde',
+                    changePinButton: 'Changer le code PIN',
+                    cancelButton: 'Annuler',
+                    withdrawButton: 'Retirer de l\'argent',
+                    languageButton: `
+                        <img src="Style/Images/Countries/france.png" alt="fr" width="55" height="55">
+                        <img src="Style/Images/Countries/english.png" alt="eng" width="55" height="55">
+                        <img src="Style/Images/Countries/germany.png" alt="ger" width="55" height="55">
+                        <img src="Style/Images/Countries/nl.png" alt="nl" width="55" height="55">
+                    `
+                },
+                de: {
+                    balanceButton: 'Kontostand prüfen',
+                    changePinButton: 'PIN ändern',
+                    cancelButton: 'Abbrechen',
+                    withdrawButton: 'Geld abheben',
+                    languageButton: `
+                        <img src="Style/Images/Countries/germany.png" alt="ger" width="55" height="55">
+                        <img src="Style/Images/Countries/english.png" alt="eng" width="55" height="55">
+                        <img src="Style/Images/Countries/france.png" alt="fr" width="55" height="55">
+                        <img src="Style/Images/Countries/nl.png" alt="nl" width="55" height="55">
+                    `
+                }
+            };
+
+            document.getElementById('balanceButton').querySelector('h1').innerHTML = translations[language].balanceButton;
+            document.getElementById('changePinButton').querySelector('h1').innerHTML = translations[language].changePinButton;
+            document.getElementById('cancelButton').querySelector('h1').innerHTML = translations[language].cancelButton;
+            document.getElementById('withdrawButton').querySelector('h1').innerHTML = translations[language].withdrawButton;
+            document.getElementById('languageButton').querySelector('h1').innerHTML = translations[language].languageButton;
+        }
+
+        // Add event listeners to buttons to navigate to respective pages
+        document.getElementById('balanceButton').addEventListener('click', function() {
+            window.location.href = 'ophalen.html';
+        });
+        document.getElementById('changePinButton').addEventListener('click', function() {
+            window.location.href = 'pincode_edit.html';
+        });
+        document.getElementById('cancelButton').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+        document.getElementById('withdrawButton').addEventListener('click', function() {
+            window.location.href = 'geldopname.html';
+        });
+        document.getElementById('languageButton').addEventListener('click', function() {
+            window.location.href = 'talen.html';
+        });
+    </script>
+  <script src="src/activity.js"></script>
+
+</body>
+</html>

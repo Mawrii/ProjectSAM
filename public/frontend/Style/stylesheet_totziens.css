@@ -1,0 +1,24 @@
+body{
+
+    background-image:url(Images/index_BG.jpg);
+  
+  }
+
+
+  .LOGO {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+  }
+
+  .doei {
+
+    font-size: 50px;
+    position: absolute;
+    bottom: 520px; 
+    left: 460px;
+    color: #000000;
+
+  }
+
+  

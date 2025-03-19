@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="Images/LOGO.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style/stylesheet_talen.css">
+    <title>Choose Language</title>
+</head>
+<body>
+    <div class="LOGO">
+        <img src="Style/Images/HR.png" alt="LOGO" width="150" height="150">
+    </div>
+
+    <h1 style="font-family:sans-serif;text-align: center;color:rgb(0, 0, 0);" id="chooseLanguageTitle">Choose Language</h1>
+    
+    <a href="talen.html" onclick="setLanguage('nl')"><div class="button1"> 
+        <h1 style="font-family:sans-serif">Nederlands</h1>
+        <img src="Style/Images/Countries/nl.png" alt="nl" width="55" height="55">
+    </div></a>
+    <a href="talen.html" onclick="setLanguage('en')"><div class="button2"> 
+        <h1 style="font-family:sans-serif">English</h1>
+        <img src="Style/Images/Countries/english.png" alt="eng" width="55" height="55">
+    </div></a>
+    <a href="talen.html" onclick="setLanguage('fr')"><div class="button3"> 
+        <h1 style="font-family:sans-serif">Français</h1>
+        <img src="Style/Images/Countries/france.png" alt="fr" width="55" height="55">
+    </div></a>
+    <a href="talen.html" onclick="setLanguage('de')"><div class="button4"> 
+        <h1 style="font-family:sans-serif">Deutsch</h1>
+        <img src="Style/Images/Countries/germany.png" alt="ger" width="55" height="55">
+    </div></a>
+    <a onclick="goToOpties()">
+        <div id="menuButtonContainer" class="back">
+            <h1 style="font-family:sans-serif;text-align: center;">🡆</h1>
+        </div>
+    </a>
+
+    <script>
+        
+        function setLanguage(language) {
+            localStorage.setItem('language', language);
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            const language = localStorage.getItem('language') || 'en';
+            const translations = {
+                en: 'Choose Language',
+                nl: 'Kies Taal',
+                fr: 'Choisir la langue',
+                de: 'Sprache wählen'
+            };
+            document.getElementById('chooseLanguageTitle').textContent = translations[language];
+        }
+
+        function goToOpties() {
+            window.location.href = 'opties.html';
+        }
+
+        // On page load, set the language text based on saved preference
+        document.addEventListener('DOMContentLoaded', updateLanguage);
+    </script>
+  <script src="src/activity.js"></script>
+
+</body>
+</html>
