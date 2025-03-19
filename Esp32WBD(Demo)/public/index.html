@@ -11,7 +11,7 @@
     <div id="output"></div>
 
     <script>
-        const ws = new WebSocket("ws://145.24.222.63:8001");
+        const ws = new WebSocket("ws://localhost:8001");
 
         ws.onopen = () => document.getElementById("status").textContent = "Connected ✅";
 
