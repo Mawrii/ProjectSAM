@@ -3,23 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Withdraw Money</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Geld Opnemen</title>
+    <link rel="stylesheet" href="../public/css/opnemen.css">
+    
+   
+
 </head>
 <body>
-    <h1>Withdraw Money</h1>
-    <p>Status: <span id="status">Connecting...</span></p>
+    <div class="screen-container">
+    <div class="screen"> 
+       
+    <!-- Logo Rechtsboven-->
+    <div class="LOGO">
+        <img src="../public/css/Images/HR.png" alt="LOGO" width="150" height="150">
+      </div>
+
+    <h1>Geld Opnemen</h1>
+    <p1>Status: <span id="status">Verbinden...</span></p1>
     <div id="output"></div>
     <div class="container">
-        <input type="text" id="amount" placeholder="Enter amount to withdraw" />
+        <input type="text" id="amount" placeholder="Voer uw gewenste bedrag in" />
         <div id="redNotice" class="notice"></div>
-        <button onclick="withdraw()">Withdraw</button>
+        <button onclick="withdraw()">Opnemen</button>
+
     </div>
-    
+    </div>
+    </div>
+
+
     <script>
         const ws = new WebSocket("ws://145.24.222.63:8001");
 
-        ws.onopen = () => document.getElementById("status").textContent = "Connected ✅";
+        ws.onopen = () => document.getElementById("status").textContent = "Verbonden ✅";
 
         ws.onmessage = (event) => {
             try {
@@ -62,7 +77,7 @@
     let notice = document.getElementById("redNotice");
 
     if (isNaN(amount) || amount <= 0) {
-        notice.textContent = "Please enter a valid amount.";
+        notice.textContent = "Voer alstublieft een geldig bedrag in";
         notice.style.display = "block"; // Show red notice
         return;
     }
@@ -73,7 +88,7 @@
     } else {
         notice.style.display = "none"; // Hide notice if successful withdrawal
         // Simulate successful withdrawal
-        let successMessage = `Success! You withdrew ${amount}€`;
+        let successMessage = `Gelukt! U heef ${amount}€ opgenomen.`;
 
         let successNotice = document.createElement("p");
         successNotice.textContent = successMessage;
