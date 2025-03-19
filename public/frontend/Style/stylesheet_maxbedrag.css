@@ -1,0 +1,30 @@
+body{
+
+    background-image:url(Images/index_BG.jpg);
+  
+  }
+
+  .LOGO {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+  }
+  .h1 {
+
+    font-size: 30px;
+    position: absolute;
+    bottom: 500px; 
+    left: 500px;
+    color: #000000;
+
+  } 
+
+  .h2 {
+
+    font-size: 30px;
+    position: absolute;
+    bottom: 400px; 
+    left: 700px;
+    color: #000000;
+
+  } 

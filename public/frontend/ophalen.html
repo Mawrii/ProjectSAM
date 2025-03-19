@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="Style/Images/LOGO.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style/stylesheet_ophalen.css">
+    <title>Account Information</title>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="LOGO">
+                <img src="Style/Images/HR.png" alt="LOGO" width="150" height="150">
+            </div>
+            <h1 id="accinfo">Account Information</h1>
+        </div>
+        
+        <div class="account-info">
+            <div class="info-box">
+                <h2 id="naam">Naam:</h2>
+                <h3 id="naama"></h3>
+                <h4 id="amount">Amount:</h4>
+                <h5 id="amounta"></h5>
+            </div>
+        </div>
+    </div>
+        
+    
+    <a href="opties.html">
+        <div back id="menuButtonContainer" class="back">
+            <h10 style="font-family:sans-serif;text-align: center;">🡆</h10>
+        </div>
+    </a>
+
+    <script>
+        // Usage example: // Change this to the desired language // Output: Choose your amount  
+        document.addEventListener('DOMContentLoaded', function() {
+            var iban = 'ZW00MASB1234561234';
+            // Fetch account information from the server
+            fetch('http://145.24.223.208:8080/api/accountinfo?target=' + iban, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    uid: 'AB34CDEF', // Replace with actual UID
+                pincode: '1234',
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch account information');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Display account information
+                document.getElementById('naama').textContent = ` ${data.naam}`;
+                document.getElementById('amounta').textContent = ` €${data.amount}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to fetch account information');
+            });
+        });
+         function setLanguage(language) {
+            localStorage.setItem('language', language);
+            updateLanguage();
+        }
+
+        const translations = {
+            en: {
+                accountInformation: 'Account Information',
+                name: 'Name: ',
+                amount: 'Amount: '
+            },
+            nl: {
+                accountInformation: 'Accountinformatie',
+                name: 'Naam: ',
+                amount: 'Bedrag: '
+            },
+            fr: {
+                accountInformation: 'Informations sur le compte',
+                name: 'Nom: ',
+                amount: 'Montant: '
+            },
+            de: {
+                accountInformation: 'Kontoinformationen',
+                name: 'Name: ',
+                amount: 'Betrag: '
+            }
+        };
+
+        // Function to set language
+        function setLanguage(language) {
+            // Set the text content of elements based on the selected language
+            document.getElementById('accinfo').textContent = translations[language].accountInformation;
+            document.getElementById('naam').textContent = translations[language].name;
+            document.getElementById('amount').textContent = translations[language].amount;
+        }
+
+        // Load saved language preference
+        const savedLanguage = localStorage.getItem('language');
+        if (savedLanguage) {
+            setLanguage(savedLanguage);
+        } else {
+            // Set default language if no preference is saved
+            setLanguage('en');
+        }
+
+    </script>
+  <script src="src/activity.js"></script>
+
+</body>
+</html>

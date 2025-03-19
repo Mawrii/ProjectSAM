@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../Style/stylesheet_index.css">
+  <link rel="icon" type="image/x-icon" href="../Style/Images/LOGO.png">
+  <title>RFID Scanner</title>
+</head>
+<body>
+  <div class="start">
+    <h1 style="font-family:sans-serif;color:black;" id="scanStatus">Voer uw bankpas in</h1>
+  </div>
+  <div class="LOGO">
+    <img src="../Style/Images/HR.png" alt="LOGO" width="150" height="150">
+  </div>
+
+  <script>
+    const socket = new WebSocket('ws://145.24.223.208:8090');
+
+    socket.addEventListener('open', function (event) {
+        console.log('Connected to WebSocket server');
+        socket.send('Send PasDet');
+    });
+
+    socket.addEventListener('message', function (event) {
+        console.log('Message from server:', event.data);
+        try {
+            const message = JSON.parse(event.data);
+            if (message.action === 'Redirect') {
+                console.log('Redirecting to pincode.html');
+                window.location.href = 'pincode.html';
+            } else {
+                console.log('Unexpected message action:', message.action);
+            }
+        } catch (e) {
+            console.log('Error parsing message:', e);
+        }
+    });
+
+    socket.addEventListener('close', function (event) {
+        console.log('WebSocket connection closed');
+        document.getElementById('scanStatus').textContent = 'WebSocket connection closed. Please reload the page.';
+    });
+
+    socket.addEventListener('error', function (error) {
+        console.error('WebSocket encountered error:', error);
+        document.getElementById('scanStatus').textContent = 'WebSocket error occurred. Please check the connection.';
+    });
+  </script>
+</body>
+</html>

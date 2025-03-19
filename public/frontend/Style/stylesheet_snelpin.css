@@ -1,0 +1,101 @@
+body{
+
+    background-image:url(Images/index_BG.jpg);
+  
+  }
+
+  .LOGO {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+  }
+  .h1 {
+
+    font-size: 30px;
+    position: absolute;
+    bottom: 650px; 
+    left: 590px;
+    color: #000000;
+
+  } 
+
+  .back {
+    position: absolute;
+    left: 1750px;
+    top: 770px;
+    display: inline-block;
+    padding: 10px 50px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center; 
+    text-decoration: none;
+    outline: none;
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #e26d7c;
+  }
+  
+  .back:hover {background-color: #ffc4cc}
+  
+  .back:active {
+    background-color: #ffffff;
+    box-shadow: 0 5px #f08aa3;
+    transform: translateY(4px);
+  }
+
+  .ja {
+    position: absolute;
+    left: 750px;
+    top: 500px;
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center; 
+    text-decoration: none;
+    outline: none;
+    color: #000000;
+    background-color: #bbb9b9;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #e26d7c;
+  }
+  
+  .ja:hover {background-color: #ffc4cc}
+  
+  .ja:active {
+    background-color: #ffffff;
+    box-shadow: 0 5px #f08aa3;
+    transform: translateY(4px);
+  }
+  
+   
+  .nee {
+    position: absolute;
+    left: 1050px;
+    top: 500px;
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center; 
+    text-decoration: none;
+    outline: none;
+    color: #000000;
+    background-color: #bbb9b9;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #e26d7c;
+  }
+  
+  .nee:hover {background-color: #ffc4cc}
+  
+  .nee:active {
+    background-color: #ffffff;
+    box-shadow: 0 5px #f08aa3;
+    transform: translateY(4px);
+  }
+  
+
