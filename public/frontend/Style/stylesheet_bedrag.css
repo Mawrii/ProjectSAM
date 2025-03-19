@@ -1,0 +1,108 @@
+body{
+
+    background-image:url(Images/index_BG.jpg);
+  
+  }
+
+
+  .LOGO {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+  }
+
+  .start {
+
+    font-size: 39px;
+    position: absolute;
+    bottom: 700px; 
+    left: 460px;
+    color: #000000;
+
+  }
+  
+  .invis {
+
+    background: transparent;
+    border: none !important;
+}​
+
+  
+  .middle {
+    
+    max-width: 168px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+  
+  }
+  
+  
+h1 { 
+  font-family: helvetica;
+}
+
+.pin-code{ 
+  position: absolute;
+  bottom: 475px; 
+  left: 625px;
+  padding: 0; 
+  margin: 0 auto; 
+  display: flex;
+  justify-content:center;
+  
+} 
+ 
+.pin-code input { 
+  border: none; 
+  text-align: center; 
+  width: 200px;
+  height:200px;
+  font-size: 80px; 
+  background-color: #F3F3F3;
+  margin-right:30px;
+} 
+
+
+
+.pin-code input:focus { 
+  border: 1px solid #573D8B;
+  outline:none;
+} 
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+.back {
+  position: absolute;
+  left: 1750px;
+  top: 770px;
+  display: inline-block;
+  padding: 10px 50px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center; 
+  text-decoration: none;
+  outline: none;
+  color: #000000;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #e26d7c;
+}
+
+.back:hover {background-color: #ffc4cc}
+
+.back:active {
+  background-color: #ffffff;
+  box-shadow: 0 5px #f08aa3;
+  transform: translateY(4px);
+}

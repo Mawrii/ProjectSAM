@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="Images/LOGO.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style/stylesheet_geldopname.css">
+    <title>Choose Language</title>
+</head>
+<body>
+    <div class="LOGO">
+        <img src="Style/Images/HR.png" alt="LOGO" width="150" height="150">
+    </div>
+
+    <h1 style="font-family:sans-serif;text-align: center;color:rgb(0, 0, 0);" id="Kiesbedrag">Kies uw bedrag</h1>
+    
+    <div class="button1" onclick="withdraw(5)">
+        <h1 style="font-family:sans-serif">5 EURO</h1>
+    </div>
+
+    <div class="button2" onclick="withdraw(10)">
+        <h1 style="font-family:sans-serif">10 EURO</h1>
+    </div>
+
+    <div class="button3" onclick="withdraw(20)">
+        <h1 style="font-family:sans-serif">20 EURO</h1>
+    </div>
+
+    <div class="button4">
+        <a href="bedrag_invoeren.html">
+            <h1 style="font-family:sans-serif" id="AnderBedrag">Ander bedrag</h1>
+        </a>
+    </div>
+
+    <a href="opties.html">
+        <div id="menuButtonContainer" class="back">
+            <h1 style="font-family:sans-serif;text-align: center;">🡆</h1>
+        </div>
+    </a>
+
+    <script>
+        // withdraw.js
+
+async function withdraw(amount) {
+    try {
+        console.log("bedrag opgenomen");
+        const response = await fetch('/withdraw-aw', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ amount: amount })
+        });
+        console.log("gegevens verstuurd");
+        if (response.ok) {
+            // Als de transactie succesvol is, navigeer naar bon.html
+            window.location.href = 'bon.html';
+        } else {
+            console.error('Er is een fout opgetreden bij het toevoegen van de transactie.');
+        }
+    } catch (error) {
+        console.error('Er is een fout opgetreden bij het verbinden met de server:', error);
+    }
+}
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+services:
+ webserver:
+    image: nginx
+    container_name: webserver
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    restart: always

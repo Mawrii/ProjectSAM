@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFID & Keypad</title>
+</head>
+<body>
+    <h1>RFID & Keypad Page</h1>
+    <p>Status: <span id="status">Connecting...</span></p>
+    <div id="output"></div>
+
+    <script>
+        const ws = new WebSocket("ws://145.24.222.63:8001");
+
+        ws.onopen = () => document.getElementById("status").textContent = "Connected ✅";
+
+        ws.onmessage = (event) => {
+            try {
+                let data = JSON.parse(event.data);
+                let outputDiv = document.getElementById("output");
+                let message = "";
+
+                if (data.type === "keypad") {
+                    if (["A", "B"].includes(data.value)) {
+                        handleNavigation(data.value);
+                    } else {
+                        message = `Key pressed: ${data.value}`;
+                    }
+                } else if (data.type === "rfid") {
+                    message = `RFID UID scanned: ${data.value}`;
+                }
+
+                if (message) {
+                    console.log(message);
+                    let p = document.createElement("p");
+                    p.textContent = message;
+                    outputDiv.appendChild(p);
+                }
+
+            } catch (error) {
+                console.error("Invalid JSON received:", event.data);
+            }
+        };
+
+        function handleNavigation(key) {
+            if (key === "A") {
+                window.location.href = "index.html"; // Stay on RFID Page
+            } else if (key === "B") {
+                window.location.href = "withdraw.html"; // Go to Withdraw Page
+            }
+        }
+    </script>
+</body>
+</html>
