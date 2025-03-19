@@ -1,0 +1,56 @@
+body{
+
+    background-image:url(Images/index_BG.jpg);
+  
+  }
+
+.LOGO {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+  }
+
+h1 { 
+    font-family: helvetica;
+    text-align:center;
+    font-size: 70px;
+    position: absolute;
+    bottom: 660px; 
+    left: 610px;
+    
+  }
+  
+  .pin-code{ 
+    position: absolute;
+    bottom: 460px; 
+    left: 525px;
+    padding: 0; 
+    margin: 0 auto; 
+    display: flex;
+    justify-content:center;
+    
+  } 
+   
+  .pin-code input { 
+    border: none; 
+    text-align: center; 
+    width: 200px;
+    height:200px;
+    font-size: 80px; 
+    background-color: #F3F3F3;
+    margin-right:30px;
+  } 
+  
+  
+  
+  .pin-code input:focus { 
+    border: 1px solid #573D8B;
+    outline:none;
+  } 
+  
+  
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }

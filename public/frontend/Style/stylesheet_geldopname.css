@@ -1,0 +1,168 @@
+body{
+
+    background-image:url(Images/GELD.png), url(Images/Bank-BG.jpg);
+  
+  }
+  
+  .taal {
+  
+    font-size: 55px;
+    position: absolute;
+    bottom: 470px; 
+    left: 460px;
+    color: #ffffff;
+
+  }
+
+  .LOGO {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+  }
+  
+  .middle {
+    
+    max-width: 145px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+  
+  }
+  
+
+  .button1 {
+    position: absolute;
+    left: 400px;
+    top: 150px;
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center; 
+    text-decoration: none;
+    outline: none;
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #e26d7c;
+  }
+  
+  .button1:hover {background-color: #ffc4cc}
+  
+  .button1:active {
+    background-color: #ffffff;
+    box-shadow: 0 5px #f08aa3;
+    transform: translateY(4px);
+  }
+  
+  
+  .button2 {
+    position: absolute;
+    left: 400px;
+    top: 500px;
+    display: inline-block;
+    padding: 15px 60px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center; 
+    text-decoration: none;
+    outline: none;
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #e26d7c;
+  }
+  
+  .button2:hover {background-color: #ffc4cc}
+  
+  .button2:active {
+    background-color: #ffffff;
+    box-shadow: 0 5px #f08aa3;
+    transform: translateY(4px);
+  }
+
+  .button3 {
+    position: absolute;
+    left: 1200px;
+    top: 150px;
+    display: inline-block;
+    padding: 15px 60px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center; 
+    text-decoration: none;
+    outline: none;
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #e26d7c;
+  }
+  
+  .button3:hover {background-color: #ffc4cc}
+  
+  .button3:active {
+    background-color: #ffffff;
+    box-shadow: 0 5px #f08aa3;
+    transform: translateY(4px);
+  }
+
+  .button4 {
+    position: absolute;
+    left: 1200px;
+    top: 500px;
+    display: inline-block;
+    padding: 15px 60px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center; 
+    text-decoration: none;
+    outline: none;
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #e26d7c;
+  }
+  
+  .button4:hover {background-color: #ffc4cc}
+  
+  .button4:active {
+    background-color: #ffffff;
+    box-shadow: 0 5px #f08aa3;
+    transform: translateY(4px);
+  }
+
+
+  .back {
+    position: absolute;
+    left: 1750px;
+    top: 770px;
+    display: inline-block;
+    padding: 10px 50px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center; 
+    text-decoration: none;
+    outline: none;
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #e26d7c;
+  }
+  
+  .back:hover {background-color: #ffc4cc}
+  
+  .back:active {
+    background-color: #ffffff;
+    box-shadow: 0 5px #f08aa3;
+    transform: translateY(4px);
+  }
+
+  
