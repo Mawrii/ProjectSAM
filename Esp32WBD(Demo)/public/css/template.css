@@ -20,23 +20,7 @@ p, p1 {
     font-family: helvetica;
   }
 
-input { 
-    font-family: helvetica;
-    /*
-    position: absolute;
-    left: 750px;
-    bottom: 630px; 
-    */
-  }
   
-button {
-    font-family: helvetica;
-    /*
-    position: absolute;
-    left: 900px;
-    bottom: 630px;
-    */  
-}
 
 .screen-container {
     background-color: #3A3A3A;
@@ -56,26 +40,9 @@ button {
     text-align: center;
 }
 
-  .notice {
-    display: none; /* Initially hidden */
-    color: white;
-    background-color: rgb(255, 0, 0);
-    padding: 10px;
-    margin-top: 10px;
-    text-align: center;
-    border-radius: 5px;
-
-}
-
   .LOGO {
     position: absolute;
     top: 40px;
     right: 60px;
   }
   
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
