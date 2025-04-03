@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Pagina</title>
+    <link rel="stylesheet" href="../public/css/bon.css">
+</head>
+
+<body>
+
+    <div class="screen-container"> 
+    <div class="screen">
+
+    <!-- Logo Rechtsboven-->
+    <div class="LOGO">
+        <img src="../public/css/Images/HR.png" alt="LOGO" width="150" height="150">
+      </div>
+        
+        <div class="wacht">
+            <h1 style="font-family:sans-serif" id="scanStatus">Uw geld wordt opgenomen, een ogenblik geduld...</h1>
+        </div>
+    
+      <div class="bon">
+        <h1 style="font-family:sans-serif">Wilt u de bon erbij?</h1>
+      </div>
+    
+      <div class="ja" onclick="verzendOpdracht()">
+        <h1 style="font-family:sans-serif">Ja</h1>
+      </div>
+    
+      <a href="totziens.html">
+        <div class="nee">
+          <h1 style="font-family:sans-serif">Nee</h1>
+        </div>
+      </a>
+
+</div>
+</div>
+
+<script>
+
+    // Maak een nieuwe WebSocket verbinding
+    const socket = new WebSocket('ws://http://145.24.222.63:8001/');
+
+    socket.onopen = function() {
+      console.log('WebSocket is connected.');
+    };
+
+    socket.onmessage = function(event) {
+      console.log('Message from server:', event.data);
+    };
+
+    socket.onclose = function() {
+      console.log('WebSocket is closed now.');
+    };
+
+    socket.onerror = function(error) {
+      console.log('WebSocket Error: ', error);
+    };
+    
+    function verzendOpdracht(){
+      if (socket.readyState === WebSocket.OPEN) {
+        socket.send('printBon');  // Stuur een bericht naar de server om de bon te printen
+        console.log('Printopdracht verzonden naar server.');
+      } else {
+        console.log('WebSocket is niet verbonden.');
+      }}
+    
+  </script>
+</body>
+</html>

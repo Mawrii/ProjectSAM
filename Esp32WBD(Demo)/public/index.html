@@ -3,17 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RFID & Keypad</title>
+    <title>RFID & Numpad</title>
+    <link rel="stylesheet" href="../public/css/index.css">
 </head>
+
 <body>
-    <h1>RFID & Keypad Page</h1>
-    <p>Status: <span id="status">Connecting...</span></p>
+
+    <div class="screen-container"> 
+    <div class="screen">
+
+    <!-- Logo Rechtsboven-->
+    <div class="LOGO">
+        <img src="../public/css/Images/HR.png" alt="LOGO" width="150" height="150">
+      </div>
+
+    <h1>RFID & Numpad</h1>
+    <p>Status: <span id="status">Verbinden...</span></p>
     <div id="output"></div>
 
+    
+</div>
+</div>
     <script>
-        const ws = new WebSocket("ws://145.24.222.63:8001");
+        const ws = new WebSocket("ws://localhost:8001");
 
-        ws.onopen = () => document.getElementById("status").textContent = "Connected ✅";
+        ws.onopen = () => document.getElementById("status").textContent = "Verbonden ✅";
 
         ws.onmessage = (event) => {
             try {
@@ -25,7 +39,7 @@
                     if (["A", "B"].includes(data.value)) {
                         handleNavigation(data.value);
                     } else {
-                        message = `Key pressed: ${data.value}`;
+                        message = `Nummer Ingedrukt: ${data.value}`;
                     }
                 } else if (data.type === "rfid") {
                     message = `RFID UID scanned: ${data.value}`;
@@ -39,7 +53,7 @@
                 }
 
             } catch (error) {
-                console.error("Invalid JSON received:", event.data);
+                console.error("Invalid JSON ontvangen:", event.data);
             }
         };
 
@@ -47,7 +61,7 @@
             if (key === "A") {
                 window.location.href = "index.html"; // Stay on RFID Page
             } else if (key === "B") {
-                window.location.href = "withdraw.html"; // Go to Withdraw Page
+                window.location.href = "opnemen.html"; // Go to Withdraw Page
             }
         }
     </script>
