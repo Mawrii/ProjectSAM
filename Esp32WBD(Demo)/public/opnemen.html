@@ -26,6 +26,12 @@
         <div id="redNotice" class="notice"></div>
         <button onclick="withdraw()">Opnemen</button>
 
+        <a href="bon.html">
+            <div class="volgende">
+              <h3 style="font-family:sans-serif">Volgende</h3>
+            </div>
+          </a>
+
     </div>
     </div>
     </div>
@@ -83,7 +89,7 @@
     }
 
     if (amount > 100) {
-        notice.textContent = "YOU DONT HAVE THAT MOTION!";
+        notice.textContent = "U heeft geen genoeg saldo";
         notice.style.display = "block"; // Show red notice
     } else {
         notice.style.display = "none"; // Hide notice if successful withdrawal
