@@ -12,14 +12,10 @@ h1 {
     font-size: 80px;
 
   }
-  h2 { 
-    font-family: helvetica;
-    bottom: 450 px;
-  }
 
-
-p, p1 { 
+h2 { 
     font-family: helvetica;
+    font-size: 50px;
   }
 
   
