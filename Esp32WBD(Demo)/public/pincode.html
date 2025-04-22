@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Pincode</title>
+    <link rel="stylesheet" href="../public/css/pincode.css">
+</head>
+
+<body>
+
+    <div class="screen-container">
+        <div class="screen">
+
+            <!-- Logo Rechtsboven-->
+            <div class="LOGO">
+                <img src="../public/css/Images/HR.png" alt="LOGO" width="150" height="150">
+            </div>
+
+            <h1>Voer Pincode In</h1>
+
+            <form>
+                <div class="pincode-blocks">
+                    <input type="password" id="pincode1" maxlength="1" class="pincode-block" required>
+                    <input type="password" id="pincode2" maxlength="1" class="pincode-block" required>
+                    <input type="password" id="pincode3" maxlength="1" class="pincode-block" required>
+                    <input type="password" id="pincode4" maxlength="1" class="pincode-block" required>
+                </div>
+            </form>
+
+            <a href="opnemen.html">
+                <div class="volgende">
+                    <h2>Bevestigen</h2>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <div id="output"></div>
+
+
+    <script>
+        // JavaScript to move to the next input
+        const pincodeInputs = document.querySelectorAll('.pincode-block');
+        
+        pincodeInputs.forEach((input, index) => {
+            input.addEventListener('input', function () {
+                if (this.value.length === 1 && index < pincodeInputs.length - 1) {
+                    pincodeInputs[index + 1].focus(); // Focus next input
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
