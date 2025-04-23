@@ -19,7 +19,7 @@
 
             <h1>Voer Pincode In</h1>
 
-            <form>
+            <form id="pincode-form">
                 <div class="pincode-blocks">
                     <input type="password" id="pincode1" maxlength="1" class="pincode-block" required>
                     <input type="password" id="pincode2" maxlength="1" class="pincode-block" required>
@@ -28,7 +28,7 @@
                 </div>
             </form>
 
-            <a href="opnemen.html">
+            <a href="geldkeuze.html">
                 <div class="volgende">
                     <h2>Bevestigen</h2>
                 </div>
@@ -39,17 +39,49 @@
 
     <div id="output"></div>
 
-
     <script>
-        // JavaScript to move to the next input
+        document.addEventListener('DOMContentLoaded', function () {
+            // Focus the first pincode input on page load
+            document.getElementById('pincode1').focus();
+        });
+
         const pincodeInputs = document.querySelectorAll('.pincode-block');
-        
+
+        // Move focus to next input after entering a digit
         pincodeInputs.forEach((input, index) => {
             input.addEventListener('input', function () {
                 if (this.value.length === 1 && index < pincodeInputs.length - 1) {
                     pincodeInputs[index + 1].focus(); // Focus next input
                 }
             });
+
+            // Backspace functionality: Move focus to previous input when backspace is pressed
+            input.addEventListener('keydown', function (e) {
+                if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
+                    pincodeInputs[index - 1].focus(); // Focus previous input
+                }
+            });
+        });
+
+        // Prevent mouse click from leaving focus in the fields
+        document.querySelector('.screen').addEventListener('click', function (e) {
+            if (!document.querySelector('.pincode-blocks').contains(e.target)) {
+                pincodeInputs[0].focus(); // Keep focus on the first input
+            }
+        });
+
+        // Submit form when pressing Enter
+        document.getElementById('pincode-form').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Prevent default behavior (form submission)
+
+                // Check if all pincode fields are filled
+                const allFilled = [...pincodeInputs].every(input => input.value.length === 1);
+
+                if (allFilled) {
+                    window.location.href = 'geldkeuze.html'; // Redirect to the next page
+                }
+            }
         });
     </script>
 
