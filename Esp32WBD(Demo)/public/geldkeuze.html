@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bedrag kiezen</title>
+  <link rel="stylesheet" href="../public/css/geldkeuze.css" />
+  
+</head>
+<body>
+
+  <div class="screen-container">
+    <div class="screen">
+      <div class="LOGO">
+        <img src="../public/css/Images/HR.png" alt="LOGO" width="150" height="150">
+      </div>
+  
+      <h1>Kies bedrag</h1>
+  
+      <div class="knoppen-container">
+        <div class="knop-groep-links">
+          <button class="keuze-knop" onclick="pinBedrag(10)">€10</button>
+          <button class="keuze-knop" onclick="pinBedrag(20)">€20</button>
+          <button class="keuze-knop" onclick="pinBedrag(50)">€50</button>
+        </div>
+  
+        <div class="knop-groep-rechts">
+          <button class="keuze-knop2" onclick="bevestig70()">Snel pinnen €70</button>
+          <a href="bedraginvoer.html">
+            <button class="keuze-knop2">Zelf bedrag kiezen</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <script>
+function pinBedrag(bedrag) {
+  window.location.href = `bevestigen.html?bedrag=${bedrag}`;
+}
+
+function bevestig70() {
+  window.location.href = "bevestigen.html?bedrag=70";
+}
+
+  </script>
+
+</body>
+</html>

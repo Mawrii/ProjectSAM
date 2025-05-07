@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zelf bedrag kiezen</title>
+  <link rel="stylesheet" href="../public/css/bedraginvoer.css" />
+     
+</head>
+<body>
+
+  <div class="screen-container">
+    <div class="screen">
+      <h1>Voer bedrag in</h1>
+      <input type="number" id="bedrag" placeholder="Bijv. 25" min="1" step="1" />
+      <br>
+      <button class="volgende" onclick="bevestigBedrag()">Bevestigen</button>
+    </div>
+  </div>
+
+  <script>
+ function bevestigBedrag() {
+  const bedrag = document.getElementById("bedrag").value;
+  if (bedrag && bedrag > 0) {
+    window.location.href = `bevestigen.html?bedrag=${bedrag}`;
+  } else {
+    alert("Vul een geldig bedrag in.");
+  }
+
+        const ws = new WebSocket("ws://145.24.222.63:8001");
+
+        ws.onopen = () => document.getElementById("status").textContent = "Verbonden ✅";
+
+        ws.onmessage = (event) => {
+            try {
+                let data = JSON.parse(event.data);
+                let message = "";
+                let amountField = document.getElementById("amount");
+
+                if (data.type === "keypad") {
+                    let key = data.value;
+
+                    if (key === "A") {
+                        window.location.href = "index.html"; // Go to RFID Page
+                    } else if (key === "B") {
+                        window.location.href = "withdraw.html"; // Stay on Withdraw Page
+                    } else if (key >= "0" && key <= "9") {
+                        amountField.value += key; // Append number to input field
+                    } else if (key === "C") {
+                        amountField.value = amountField.value.slice(0, -1); // Remove last digit
+                    } else if (key === "D") {
+                        withdraw(); // Execute withdrawal
+                    }
+
+                }
+
+                if (message) {
+                    console.log(message);
+                    let outputDiv = document.getElementById("output");
+                    let p = document.createElement("p");
+                    p.textContent = message;
+                    outputDiv.appendChild(p);
+                }
+
+            } catch (error) {
+                console.error("Invalid JSON received:", event.data);
+            }
+        };
+        function withdraw() {
+    let amount = parseFloat(document.getElementById("amount").value);
+    let outputDiv = document.getElementById("output");
+    let notice = document.getElementById("redNotice");
+
+    if (isNaN(amount) || amount <= 0) {
+        notice.textContent = "Voer alstublieft een geldig bedrag in";
+        notice.style.display = "block"; // Show red notice
+        return;
+    }
+
+    if (amount > 100) {
+        notice.textContent = "U heeft geen genoeg saldo";
+        notice.style.display = "block"; // Show red notice
+    } else {
+        notice.style.display = "none"; // Hide notice if successful withdrawal
+        // Simulate successful withdrawal
+        let successMessage = `Gelukt! U heef ${amount}€ opgenomen.`;
+
+        let successNotice = document.createElement("p");
+        successNotice.textContent = successMessage;
+        outputDiv.appendChild(successNotice);
+    }
+}
+
+}
+  </script>
+
+</body>
+</html>
