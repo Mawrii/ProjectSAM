@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enter Pincode</title>
-    <link rel="stylesheet" href="../public/css/pincode.css">
+    <link rel="stylesheet" href="./css/pincode.css">
 </head>
 
 <body>
@@ -14,7 +14,7 @@
 
             <!-- Logo Rechtsboven-->
             <div class="LOGO">
-                <img src="../public/css/Images/HR.png" alt="LOGO" width="150" height="150">
+                <img src="./css/Images/HR.png" alt="LOGO" width="150" height="150">
             </div>
 
             <h1>Voer Pincode In</h1>
@@ -28,62 +28,18 @@
                 </div>
             </form>
 
-            <a href="geldkeuze.html">
-                <div class="volgende">
-                    <h2>Bevestigen</h2>
-                </div>
-            </a>
+            <div class="volgende">
+                <h2 id="submit-button">Bevestigen</h2>
+            </div>
+
+            <div id="status"></div>
 
         </div>
     </div>
 
     <div id="output"></div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Focus the first pincode input on page load
-            document.getElementById('pincode1').focus();
-        });
-
-        const pincodeInputs = document.querySelectorAll('.pincode-block');
-
-        // Move focus to next input after entering a digit
-        pincodeInputs.forEach((input, index) => {
-            input.addEventListener('input', function () {
-                if (this.value.length === 1 && index < pincodeInputs.length - 1) {
-                    pincodeInputs[index + 1].focus(); // Focus next input
-                }
-            });
-
-            // Backspace functionality: Move focus to previous input when backspace is pressed
-            input.addEventListener('keydown', function (e) {
-                if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
-                    pincodeInputs[index - 1].focus(); // Focus previous input
-                }
-            });
-        });
-
-        // Prevent mouse click from leaving focus in the fields
-        document.querySelector('.screen').addEventListener('click', function (e) {
-            if (!document.querySelector('.pincode-blocks').contains(e.target)) {
-                pincodeInputs[0].focus(); // Keep focus on the first input
-            }
-        });
-
-        // Submit form when pressing Enter
-        document.getElementById('pincode-form').addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') {
-                e.preventDefault(); // Prevent default behavior (form submission)
-
-                // Check if all pincode fields are filled
-                const allFilled = [...pincodeInputs].every(input => input.value.length === 1);
-
-                if (allFilled) {
-                    window.location.href = 'geldkeuze.html'; // Redirect to the next page
-                }
-            }
-        });
-    </script>
+    <script src="./src/pincode.js"></script>
 
 </body>
 </html>
