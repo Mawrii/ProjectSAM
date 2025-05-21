@@ -71,8 +71,8 @@ h1 {
   
 .ja {
     position: absolute;
-    left: 700px;
-    top: 540px;
+    left: 600px;
+    top: 440px;
     
     padding: 15px 35px;
     font-size: 20px;
@@ -98,8 +98,8 @@ h1 {
    
 .nee {
     position: absolute;
-    left: 930px;
-    top: 540px;
+    left: 780px;
+    top: 440px;
     display: inline-block;
     padding: 15px 25px;
     font-size: 20px;

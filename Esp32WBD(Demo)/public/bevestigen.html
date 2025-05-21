@@ -21,8 +21,8 @@
       </div>
 
       <div class="keuze-buttons">
-        <button class="keuze-knop" onclick="bevestig()">✅ Bevestigen</button>
-        <button class="keuze-knop" onclick="annuleer()">❌ Annuleren</button>
+        <button class="keuze-knop" onclick="bevestig()">Bevestigen</button>
+        <button class="keuze-knop" onclick="annuleer()">Annuleren</button>
       </div>
     </div>
   </div>
@@ -37,7 +37,7 @@ document.getElementById("bedragTekst").style.fontFamily = "Arial, sans-serif"; /
 
     // Toon het bedrag
     document.getElementById("bedragTekst").textContent = 
-      bedrag ? `Wil je echt €${bedrag} pinnen?` : "Geen bedrag opgegeven.";
+      bedrag ? `Wilt u €${bedrag} pinnen?` : "Geen bedrag opgegeven.";
 
     function bevestig() {
 

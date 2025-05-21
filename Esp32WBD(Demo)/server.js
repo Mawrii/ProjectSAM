@@ -124,7 +124,6 @@ async function verifyPinAndUpdateAttempts(rekeningnummer, pincode) {
 
 wss.on("connection", (ws) => {
     console.log("New WebSocket connection");
-
     ws.on("message", async (message) => {
         const text = message.toString();
         console.log("Received Message:", text);
@@ -136,7 +135,20 @@ wss.on("connection", (ws) => {
             console.error("Invalid JSON received:", text);
             return;
         }
+        if(text === "ESP32"){
+            esp32Client = ws;
+      console.log('✅ ESP32 geregistreerd als client');
+      return;
+        }
 
+        if(text === "printBon"){
+            if (esp32Client && esp32Client.readyState === WebSocket.OPEN) {
+                esp32Client.send('printBon');
+                console.log('➡️ printBon doorgestuurd naar ESP32');
+              } else {
+                console.log('⚠️ ESP32 niet verbonden');
+              }
+        }
         if (data.type === "identity") {
             clients.set(ws, data.role);
             console.log(`Client identified as: ${data.role}`);
@@ -197,6 +209,19 @@ wss.on("connection", (ws) => {
                 }));
             }
         }
+        // Keypad input forwarding to pincode page
+if (data.type === "keypad") {
+    console.log(`🔢 Keypad input received: ${data.value}`);
+    wss.clients.forEach(client => {
+        if (clients.get(client) === "pincode" && client.readyState === WebSocket.OPEN) {
+            client.send(JSON.stringify({
+                type: "keypad",
+                value: data.value
+            }));
+        }
+    });
+}
+
     });
 
     ws.on("close", () => {

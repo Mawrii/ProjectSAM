@@ -24,46 +24,41 @@
     
 </div>
 </div>
-    <script>
-        const ws = new WebSocket("ws://localhost:8001");
+<script>const ws = new WebSocket("ws://145.24.222.63:8001");
 
-        ws.onopen = () => document.getElementById("status").textContent = "Verbonden ✅";
+ws.onopen = () => {
+    console.log("WebSocket Verbonden!");
+    ws.send(JSON.stringify({ type: "identity", role: "web" }));
 
-        ws.onmessage = (event) => {
-            try {
-                let data = JSON.parse(event.data);
-                let outputDiv = document.getElementById("output");
-                let message = "";
+};
 
-                if (data.type === "keypad") {
-                    if (["A", "B"].includes(data.value)) {
-                        handleNavigation(data.value);
-                    } else {
-                        message = `Nummer Ingedrukt: ${data.value}`;
-                    }
-                } else if (data.type === "rfid") {
-                    message = `RFID UID scanned: ${data.value}`;
-                }
+ws.onmessage = (event) => {
+    try {
+        const data = JSON.parse(event.data);
+        console.log("📥 Bericht ontvangen:", event.data);
 
-                if (message) {
-                    console.log(message);
-                    let p = document.createElement("p");
-                    p.textContent = message;
-                    outputDiv.appendChild(p);
-                }
-
-            } catch (error) {
-                console.error("Invalid JSON ontvangen:", event.data);
-            }
-        };
-
-        function handleNavigation(key) {
-            if (key === "A") {
-                window.location.href = "index.html"; // Stay on RFID Page
-            } else if (key === "B") {
-                window.location.href = "opnemen.html"; // Go to Withdraw Page
+        // Check if the server has validated the RFID and provides a rekeningnummer
+        if (data.type === "verified") {
+            if (data.status === "ok") {
+                // Save rekeningnummer to localStorage
+                localStorage.setItem("rekeningNummer", data.rekeningnummer);
+                console.log("Rekeningnummer saved to localStorage:", data.rekeningnummer);
+                window.location.href = "pincode.html";  // Redirect to the pincode page
+            } else {
+                // If not found, show an error
+                alert("Ongeldige bankpas!");
             }
         }
-    </script>
+    } catch (err) {
+        console.error("Invalid JSON ontvangen:", event.data);
+    }
+};
+
+ws.onerror = (err) => {
+    document.getElementById("status").textContent = "Verbindingsfout met WebSocket-server.";
+    console.error("WebSocket error:", err);
+};
+
+</script>
 </body>
 </html>

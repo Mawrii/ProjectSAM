@@ -1,15 +1,16 @@
 const ws = new WebSocket("ws://145.24.222.63:8001");
 
 ws.onopen = () => {
-    console.log("WebSocket connected.");
+    console.log("WebSocket Verbonden!");
     ws.send(JSON.stringify({ type: "identity", role: "web" }));
-    ws
+
 };
 
 ws.onmessage = (event) => {
     try {
         const data = JSON.parse(event.data);
-        
+        console.log("📥 Bericht ontvangen:", event.data);
+
         // Check if the server has validated the RFID and provides a rekeningnummer
         if (data.type === "verified") {
             if (data.status === "ok") {
@@ -31,3 +32,4 @@ ws.onerror = (err) => {
     document.getElementById("status").textContent = "Verbindingsfout met WebSocket-server.";
     console.error("WebSocket error:", err);
 };
+
