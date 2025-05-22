@@ -47,7 +47,7 @@ p, p1 {
 .volgende {
   position: absolute;
   left: 50%; /* Center the button */
-  top: 60%; /* Adjust button to move lower */
+  top: 57%; /* Adjust button to move lower */
   transform: translateX(-50%); /* Center horizontally */
   display: inline-block;
   padding: 10px 20px; /* Adjust button padding */
@@ -75,8 +75,8 @@ p, p1 {
 
 .pincode-blocks {
   position: absolute;
-  left: 650px;
-  bottom: 450px;
+  left: 550px;
+  bottom: 350px;
   display: flex;
   justify-content: space-evenly; /* Evenly space the blocks */
   width: 20%; /* Adjusted width for better alignment */
@@ -98,4 +98,24 @@ p, p1 {
 .pincode-block:focus {
   outline: none;
   border-color: #cf0245;
+}
+
+.message-box {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background-color: #f8d7da; /* Lichtrood */
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 15px 20px;
+  border-radius: 5px;
+  font-family: helvetica;
+  font-size: 18px;
+  max-width: 300px;
+  display: none; /* standaard verborgen */
+  z-index: 1000;
+}
+
+.message-box.show {
+  display: block;
 }

@@ -19,9 +19,10 @@
   
       <div class="knoppen-container">
         <div class="knop-groep-links">
-          <button class="keuze-knop" onclick="pinBedrag(10)">€10</button>
-          <button class="keuze-knop" onclick="pinBedrag(20)">€20</button>
-          <button class="keuze-knop" onclick="pinBedrag(50)">€50</button>
+         
+        <a href="index.html">
+          <button class="keuze-knop">← Annuleren</button>
+        </a>
         </div>
   
         <div class="knop-groep-rechts">
@@ -36,6 +37,8 @@
   
 
   <script>
+
+    
 function pinBedrag(bedrag) {
   window.location.href = `bevestigen.html?bedrag=${bedrag}`;
 }

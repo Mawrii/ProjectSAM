@@ -58,3 +58,23 @@ input[type="number"] {
   box-shadow: 0 5px #f08aa3;
   transform: translateY(4px);
 }
+
+.message-box {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 15px 20px;
+  border-radius: 5px;
+  font-family: helvetica;
+  font-size: 18px;
+  max-width: 300px;
+  display: none;
+  z-index: 1000;
+}
+
+.message-box.show {
+  display: block;
+}

@@ -10,7 +10,7 @@
 
     h1 {
       font-family: helvetica;
-      font-size: 44px;
+      font-size: 50px;
     }
 
     .screen-container {
@@ -54,7 +54,7 @@
     /* optioneel: breedte fixen voor betere uitlijning */
     .knop-groep-links,
     .knop-groep-rechts {
-      width: 45%;
+      width: 35%;
       align-items: center;
     }
     
@@ -100,4 +100,29 @@
       box-shadow: 0 5px #f08aa3;
       transform: translateY(4px);
     }
+
+    .keuze-knop3 {
+      position:absolute;
+      left: 37%;
+      top: 47%;
+      padding: 20px 40px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #000000;
+      background-color: #bbb9b9;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 9px #cf0245;
+    }
+
+    .keuze-knop3:hover {
+      background-color: #ffc4cc;
+    }
+
+    .keuze-knop3:active {
+      background-color: #ffffff;
+      box-shadow: 0 5px #f08aa3;
+      transform: translateY(4px);
+    }
+
 
