@@ -1,15 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     const rekeningnummer = localStorage.getItem('rekeningNummer');
-       /*
-        if (!rekeningnummer) {
-            alert("No rekeningnummer found. Please scan your card first.");
-            window.location.href = "index.html";
-            return;
-        } else {
-            console.log("Rekeningnummer retrieved:", rekeningnummer);
-        } */
-        const pincodeInputs = document.querySelectorAll('.pincode-block');
-    const ws = new WebSocket("ws://145.24.222.63:8001");
+    const pasnummer = localStorage.getItem('pasnummer');
+
+    const pincodeInputs = document.querySelectorAll('.pincode-block');
+    const ws = new WebSocket("ws://145.24.222.63:8080");
     let currentIndex = 0;
 
     function showMessage(msg, isError = true) {
@@ -22,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         setTimeout(() => {
             box.classList.remove("show");
-        }, 4000); // verdwijnt na 4 seconden
+        }, 4000);
     }
 
     ws.onopen = () => {
@@ -30,16 +24,44 @@ document.addEventListener('DOMContentLoaded', function () {
         ws.send(JSON.stringify({ type: "identity", role: "pincode" }));
     };
 
-    ws.onmessage = (event) => {
+    ws.onmessage = async (event) => {
         try {
             const data = JSON.parse(event.data);
 
             if (data.type === "verified") {
                 if (data.status === "ok") {
-                    showMessage("✅ PIN correct. Wordt doorgestuurd...", false);
-                    setTimeout(() => {
-                        window.location.href = "geldkeuze.html";
-                    }, 1500);
+                    showMessage("✅ PIN correct. Ophalen gebruikersgegevens...", false);
+
+                    const pin = Array.from(pincodeInputs).map(input => input.value).join("");
+
+                    try {
+                        const response = await fetch("http://145.24.222.63:8080/api/proxy/verify-pin", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                pin: pin,
+                                iban: rekeningnummer,
+                                pasnummer: pasnummer
+                            })
+                        });
+
+                        if (response.ok) {
+                            localStorage.setItem("pin", pin);
+                            const userInfo = await response.json();
+                            console.log("User info:", userInfo);
+                            localStorage.setItem("userInfo", JSON.stringify(userInfo));
+
+                            setTimeout(() => {
+                                window.location.href = "geldkeuze.html";
+                            }, 1500);
+                        } else {
+                            const errorData = await response.json();
+                            showMessage("Fout bij ophalen gebruikersgegevens: " + (errorData.message || response.statusText));
+                        }
+                    } catch (err) {
+                        console.error("Fetch error:", err);
+                        showMessage("Fout bij ophalen gebruikersgegevens.");
+                    }
                 } else if (data.status === "not_found") {
                     showMessage(`❌ Incorrect PIN! ${data.message}`);
                 } else if (data.status === "locked") {
@@ -54,9 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (["A", "B"].includes(key)) {
                     if (key === "A") {
                         window.location.href = "index.html";
-                    } else if (key === "B") {
-                        window.location.href = "opnemen.html";
-                    }
+                    } 
                     return;
                 }
 

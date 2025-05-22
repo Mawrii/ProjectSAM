@@ -1,55 +1,36 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bevestig bedrag</title>
-  <link rel="stylesheet" href="./css/bevestigen.css" />
+  <!DOCTYPE html>
+  <html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Bevestig bedrag</title>
+    <link rel="stylesheet" href="./css/bevestigen.css" />
+  </head>
+  <body>
 
-</head>
-<body>
+    <div class="LOGO">
+      <img src="./css/Images/HR.png" alt="LOGO" width="150" height="150">
+    </div>
+    
+    <div class="screen-container">
+      <div class="screen">
+        <h1>Bevestigen</h1>
+        <div class="bedrag-tekst" id="bedragTekst">
+          <!-- Hier komt het bedrag -->
+        </div>
 
-  <div class="LOGO">
-    <img src="./css/Images/HR.png" alt="LOGO" width="150" height="150">
-  </div>
-  
-  <div class="screen-container">
-    <div class="screen">
-      <h1>Bevestigen</h1>
-      <div class="bedrag-tekst" id="bedragTekst">
-        <!-- Hier komt het bedrag -->
-      </div>
-
-      <div class="keuze-buttons">
-        <button class="keuze-knop" onclick="bevestig()">Bevestigen</button>
-        <button class="keuze-knop" onclick="annuleer()">Annuleren</button>
+        <div class="keuze-buttons">
+          <button class="keuze-knop" onclick="bevestig()">Bevestigen</button>
+                    <a href="geldkeuze.html">
+            <button class="keuze-knop">Annuleren</button>
+          </a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script>
+  <script src="./src/bevestigen.js">
+</script>
 
-document.getElementById("bedragTekst").style.fontFamily = "Arial, sans-serif"; // Verander naar het gewenste lettertype
 
-    // Haal het bedrag uit de URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const bedrag = urlParams.get('bedrag');
-
-    // Toon het bedrag
-    document.getElementById("bedragTekst").textContent = 
-      bedrag ? `Wilt u €${bedrag} pinnen?` : "Geen bedrag opgegeven.";
-
-    function bevestig() {
-
-      // Redirect naar bijv. bonpagina of terug naar start
-      window.location.href = "bon.html";
-    }
-
-    function annuleer() {
-      window.history.back(); // terug naar vorige pagina
-    }
-
-  </script>
-
-</body>
-</html>
+  </body>
+  </html>

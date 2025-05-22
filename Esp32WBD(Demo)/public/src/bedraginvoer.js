@@ -12,7 +12,7 @@
         const bedragInput = document.getElementById("bedrag");
         const notice = document.getElementById("redNotice");
         const button = document.querySelector(".volgende");
-        const ws = new WebSocket("ws://145.24.222.63:8001");
+        const ws = new WebSocket("ws://145.24.222.63:8080");
 
         // Focus input on load
         bedragInput.focus();
@@ -40,6 +40,7 @@
                     } else if (key === "D") {
                         bevestigBedrag();
                     } else if (!isNaN(key)) {
+                        console.log("Adding digit to input:", key);
                         bedragInput.value += key;
                     }
                 }
