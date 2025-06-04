@@ -26,7 +26,9 @@
         </div>
   
         <div class="knop-groep-rechts">
-          <button class="keuze-knop2" onclick="bevestig70()">Snel pinnen €70</button>
+          <a href="bevestigen.html?bedrag=70">
+          <button class="keuze-knop2">Snel pinnen €70</button>
+          </a>
           <a href="bedraginvoer.html">
             <button class="keuze-knop2">Zelf bedrag kiezen</button>
           </a>
@@ -36,18 +38,7 @@
   </div>
   
 
-  <script>
-
-    
-function pinBedrag(bedrag) {
-  window.location.href = `bevestigen.html?bedrag=${bedrag}`;
-}
-
-function bevestig70() {
-  window.location.href = "bevestigen.html?bedrag=70";
-}
-
-  </script>
+  <script src="./src/geldkeuze.js"></script>
 
 </body>
 </html>

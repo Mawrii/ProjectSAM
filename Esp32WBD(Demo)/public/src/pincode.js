@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const rekeningnummer = localStorage.getItem('rekeningNummer');
-    const pasnummer = localStorage.getItem('pasnummer');
-
+    const isLocalIban = /^TD\d{2}MASB/.test(rekeningnummer);
+    console.log("Loaded rekeningnummer:", rekeningnummer);
+    console.log("Is local IBAN:", isLocalIban);
     const pincodeInputs = document.querySelectorAll('.pincode-block');
     const ws = new WebSocket("ws://145.24.222.63:8080");
     let currentIndex = 0;
@@ -28,6 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const data = JSON.parse(event.data);
 
+            // Add this to get localStorage values fresh on every message
+            const rekeningnummer = localStorage.getItem('rekeningNummer');
+            const pasnummer = localStorage.getItem('pasnummer');
+
             if (data.type === "verified") {
                 if (data.status === "ok") {
                     showMessage("✅ PIN correct. Ophalen gebruikersgegevens...", false);
@@ -35,19 +40,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     const pin = Array.from(pincodeInputs).map(input => input.value).join("");
 
                     try {
-                        const response = await fetch("http://145.24.222.63:8080/api/proxy/verify-pin", {
+                        const endpoint = "http://145.24.222.63:8080/api/noob/users/getinfo";
+
+                        const response = await fetch(endpoint, {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({
                                 pin: pin,
                                 iban: rekeningnummer,
-                                pasnummer: pasnummer
                             })
                         });
 
                         if (response.ok) {
-                            localStorage.setItem("pin", pin);
                             const userInfo = await response.json();
+                            localStorage.setItem("pin", pin);
                             console.log("User info:", userInfo);
                             localStorage.setItem("userInfo", JSON.stringify(userInfo));
 
@@ -55,28 +61,40 @@ document.addEventListener('DOMContentLoaded', function () {
                                 window.location.href = "geldkeuze.html";
                             }, 1500);
                         } else {
-                            const errorData = await response.json();
-                            showMessage("Fout bij ophalen gebruikersgegevens: " + (errorData.message || response.statusText));
+                            const contentType = response.headers.get("content-type");
+                            let errorData = {};
+
+                            if (contentType && contentType.includes("application/json")) {
+                                errorData = await response.json();
+                            } else {
+                                errorData.message = await response.text();
+                            }
+
+                            showMessage("Fout bij ophalen gebruikersgegevens: " + errorData.message);
                         }
                     } catch (err) {
                         console.error("Fetch error:", err);
                         showMessage("Fout bij ophalen gebruikersgegevens.");
                     }
+
                 } else if (data.status === "not_found") {
                     showMessage(`❌ Incorrect PIN! ${data.message}`);
                 } else if (data.status === "locked") {
                     showMessage(`🔒 ${data.message}`);
+                    // Optionally disable inputs if locked
+                    pincodeInputs.forEach(input => input.disabled = true);
                 }
             }
+
 
             if (data.type === "keypad") {
                 const key = data.value;
                 console.log("🔢 Keypad Key Received:", key);
 
-                if (["A", "B"].includes(key)) {
-                    if (key === "A") {
+                if (["A", "*"].includes(key)) {
+                    if (key === "*") {
                         window.location.href = "index.html";
-                    } 
+                    }
                     return;
                 }
 

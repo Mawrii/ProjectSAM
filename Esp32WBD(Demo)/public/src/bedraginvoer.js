@@ -1,23 +1,13 @@
     document.addEventListener('DOMContentLoaded', () => {
-        const rekeningnummer = localStorage.getItem('rekeningNummer');
-       /*
-        if (!rekeningnummer) {
-            alert("No rekeningnummer found. Please scan your card first.");
-            window.location.href = "index.html";
-            return;
-        } else {
-            console.log("Rekeningnummer retrieved:", rekeningnummer);
-        } */
-
         const bedragInput = document.getElementById("bedrag");
         const notice = document.getElementById("redNotice");
         const button = document.querySelector(".volgende");
         const ws = new WebSocket("ws://145.24.222.63:8080");
 
-        // Focus input on load
+       
         bedragInput.focus();
 
-        // WebSocket setup
+     
         ws.onopen = () => {
             console.log("WebSocket connected.");
             ws.send(JSON.stringify({ type: "identity", role: "bedraginvoer" }));
@@ -29,7 +19,7 @@
 
                 if (data.type === "keypad") {
                     const key = data.value;
-                    console.log("🔢 Keypad Key Received:", key);
+                    console.log("Keypad Key Received:", key);
 
                     if (key === "A") {
                         window.location.href = "index.html";
@@ -39,7 +29,9 @@
                         bedragInput.value = bedragInput.value.slice(0, -1);
                     } else if (key === "D") {
                         bevestigBedrag();
-                    } else if (!isNaN(key)) {
+                    } else if (key === "*") {
+        window.location.href = "index.html"; // Navigate after confirmation
+    } else if (!isNaN(key)) {
                         console.log("Adding digit to input:", key);
                         bedragInput.value += key;
                     }
@@ -60,23 +52,36 @@
         };
 
         button.addEventListener("click", bevestigBedrag);
+function bevestigBedrag() {
+    const bedrag = parseFloat(bedragInput.value);
 
-        function bevestigBedrag() {
-            const bedrag = parseFloat(bedragInput.value);
-            if (isNaN(bedrag) || bedrag <= 0) {
-                notice.textContent = "Voer alstublieft een geldig bedrag in.";
-                notice.style.display = "block";
-                return;
-            }
+    if (isNaN(bedrag)) {
+        notice.textContent = "Voer alstublieft een geldig bedrag in.";
+        notice.style.display = "block";
+        return;
+    }
 
-            if (bedrag > 100) {
-                notice.textContent = "U heeft geen genoeg saldo.";
-                notice.style.display = "block";
-                return;
-            }
+    if (bedrag < 20) {
+        notice.textContent = "U moet minimaal €20 opnemen.";
+        notice.style.display = "block";
+        return;
+    }
 
-            notice.style.display = "none";
-            console.log(`✅ Bevestigd bedrag: €${bedrag}`);
-            window.location.href = `bevestigen.html?bedrag=${bedrag}`;
-        }
+    if (bedrag > 200) {
+        notice.textContent = "U kunt maximaal €200 per keer opnemen.";
+        notice.style.display = "block";
+        return;
+    }
+
+    if (bedrag % 5 !== 0) {
+        notice.textContent = "Alleen bedragen die deelbaar zijn door 5 zijn toegestaan.";
+        notice.style.display = "block";
+        return;
+    }
+
+    notice.style.display = "none";
+    console.log(`Bevestigd bedrag: €${bedrag}`);
+    window.location.href = `bevestigen.html?bedrag=${bedrag}`;
+}
+
     }); 

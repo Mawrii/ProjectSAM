@@ -38,35 +38,6 @@
 </div>
 </div>
 
-<script>
-
-    // Maak een nieuwe WebSocket verbinding
-    const socket = new WebSocket('ws://http://145.24.222.63:8001/');
-
-    socket.onopen = function() {
-      console.log('WebSocket is connected.');
-    };
-
-    socket.onmessage = function(event) {
-      console.log('Message from server:', event.data);
-    };
-
-    socket.onclose = function() {
-      console.log('WebSocket is closed now.');
-    };
-
-    socket.onerror = function(error) {
-      console.log('WebSocket Error: ', error);
-    };
-    
-    function verzendOpdracht(){
-      if (socket.readyState === WebSocket.OPEN) {
-        socket.send('printBon');  // Stuur een bericht naar de server om de bon te printen
-        console.log('Printopdracht verzonden naar server.');
-      } else {
-        console.log('WebSocket is niet verbonden.');
-      }}
-    
-  </script>
+<script src="./src/bon.js"></script>
 </body>
 </html>
